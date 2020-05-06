@@ -1,3 +1,4 @@
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -5,8 +6,214 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+var value = 'New';
+
+//class statefulDataTable extends StatefulWidget {
+//  List<String> rows;
+//  List<String> col;
+//  statefulDataTable({this.rows, this.col});
+//
+//  @override
+//  _statefulDataTableState createState() => _statefulDataTableState();
+//}
+//
+//class _statefulDataTableState extends State<statefulDataTable> {
+////  var value;
+//
+//  List<String> rows;
+//  List<String> col;
+//  _statefulDataTableState({this.rows, this.col});
+//
+//  var dataTable;
+//
+//  @override
+//  void initState() {
+//    // TODO: implement initState
+//    super.initState();
+//
+//    this.col = [
+//      'Order No.',
+//      'Order Details',
+//      'Customer Name',
+//      'Customer Contact',
+//      'Total'
+//    ];
+//
+//    this.rows = [
+//      '1',
+//      '1 Long Ranger',
+//      'Babbu bhai',
+//      '090078601',
+//      '450 PKR/-',
+//    ];
+//  }
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    dataTable = DataTable(columns: [
+//      DataColumn(
+//        label: Text(col[0]),
+//      ),
+//      DataColumn(
+//        label: Text(col[1]),
+//      ),
+//      DataColumn(
+//        label: Text(col[2]),
+//      ),
+//      DataColumn(
+//        label: Text(col[3]),
+//      ),
+//      DataColumn(
+//        label: Text(col[4]),
+//      ),
+//    ], rows: [
+//      DataRow(
+//        cells: [
+//          DataCell(
+//            Text(rows[0]),
+//          ),
+//          DataCell(
+//            Text(rows[1]),
+//          ),
+//          DataCell(
+//            Text(rows[2]),
+//          ),
+//          DataCell(
+//            Text(rows[3]),
+//          ),
+//          DataCell(
+//            Text(rows[4]),
+//          ),
+//        ],
+//      ),
+//    ]);
+//
+//    return dataTable;
+//  }
+//}
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+
+//  Firestore _firestore = Firestore.instance;
+  var table = DataTable(columns: [
+    DataColumn(
+      label: Text(
+        'Order No.',
+      ),
+    ),
+    DataColumn(
+      label: Text('Order Details'),
+    ),
+    DataColumn(
+      label: Text('Customer Name'),
+    ),
+    DataColumn(
+      label: Text('Customer Contact'),
+    ),
+    DataColumn(
+      label: Text('Total'),
+    ),
+  ], rows: [
+    DataRow(
+      cells: [
+        DataCell(
+          Text('1'),
+        ),
+        DataCell(
+          Text('1 Long Ranger'),
+        ),
+        DataCell(
+          Text('Babbu bhai'),
+        ),
+        DataCell(
+          Text('090078601'),
+        ),
+        DataCell(
+          Text('450 PKR/-'),
+        ),
+      ],
+    ),
+  ]);
+  var updateTable;
+
+  List<String> col = [
+    'Order No.',
+    'Order Details',
+    'Customer Name',
+    'Customer Contact',
+    'Total'
+  ];
+
+  List<String> rows = [
+    '1',
+    '1 Long Ranger',
+    'Babbu bhai',
+    '090078601',
+    '450 PKR/-',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+
+//    table = statefulDataTable(rows:[],[]);
+    updateTable = (value) {
+      setState(() {
+        if (value == 'New') {
+          table = DataTable(columns: [
+            DataColumn(
+              label: Text(col[0]),
+            ),
+            DataColumn(
+              label: Text(col[1]),
+            ),
+            DataColumn(
+              label: Text(col[2]),
+            ),
+            DataColumn(
+              label: Text(col[3]),
+            ),
+            DataColumn(
+              label: Text(col[4]),
+            ),
+          ], rows: [
+            DataRow(
+              cells: [
+                DataCell(
+                  Text(rows[0]),
+                ),
+                DataCell(
+                  Text(rows[1]),
+                ),
+                DataCell(
+                  Text(rows[2]),
+                ),
+                DataCell(
+                  Text(rows[3]),
+                ),
+                DataCell(
+                  Text(rows[4]),
+                ),
+              ],
+            ),
+          ]);
+        }
+      });
+    };
+
+//    StreamBuilder<QuerySnapshot>(
+//        stream: _firestore.collection('Sandwiches').snapshots(),
+//        builder: (context, snapshot) {
+//          final data = snapshot.data.documents;
+//        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -155,16 +362,231 @@ class MyApp extends StatelessWidget {
                     Row(
                       children: <Widget>[
                         Spacer(
+                          flex: 4,
+                        ),
+                        Container(
+                          child: Row(
+                            children: <Widget>[
+                              Card(
+                                  child: Expanded(
+                                child: Container(
+                                  width: 200,
+                                  height: 100,
+                                  child: Column(
+                                    children: <Widget>[
+                                      ListTile(
+                                        title: Text("Total Orders"),
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 16.0),
+                                        subtitle: Text("27"),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )),
+                              Card(
+                                child: Expanded(
+                                  child: Container(
+                                    width: 200,
+                                    height: 100,
+                                    child: Column(
+                                      children: <Widget>[
+                                        ListTile(
+                                          title: Text("Total Sales"),
+                                          contentPadding: EdgeInsets.symmetric(
+                                              horizontal: 16.0),
+                                          subtitle: Text("16420 PKR"),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Card(
+                                child: Expanded(
+                                  child: Container(
+                                    width: 200,
+                                    height: 100,
+                                    child: Column(
+                                      children: <Widget>[
+                                        ListTile(
+                                          title: Text("Orders Cancelled"),
+                                          contentPadding: EdgeInsets.symmetric(
+                                              horizontal: 16.0),
+                                          subtitle: Text("2"),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Spacer(
+                          flex: 40,
+                        ),
+                      ],
+                    ),
+                    Spacer(
+                      flex: 5,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Spacer(
                           flex: 2,
                         ),
-//                        Container(
-//                          child: cardChild,
-//                          margin: EdgeInsets.all(15.0),
-//                          decoration: BoxDecoration(
-//                            color: Colors.white,
-//                            borderRadius: BorderRadius.circular(10.0),
-//                          ),
-//                        ),
+                        Text(
+                          'Orders',
+                          style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.black45,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Spacer(
+                          flex: 40,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Spacer(
+                          flex: 3,
+                        ),
+                        RaisedButton(
+                          onPressed: () {
+                            print('New Button Pressed');
+                            setState(() {
+                              table = DataTable(columns: [
+                                DataColumn(
+                                  label: Text(col[0]),
+                                ),
+                                DataColumn(
+                                  label: Text(col[1]),
+                                ),
+                                DataColumn(
+                                  label: Text(col[2]),
+                                ),
+                                DataColumn(
+                                  label: Text(col[3]),
+                                ),
+                                DataColumn(
+                                  label: Text(col[4]),
+                                ),
+                              ], rows: [
+                                DataRow(
+                                  cells: [
+                                    DataCell(
+                                      Text(rows[0]),
+                                    ),
+                                    DataCell(
+                                      Text(rows[1]),
+                                    ),
+                                    DataCell(
+                                      Text(rows[2]),
+                                    ),
+                                    DataCell(
+                                      Text(rows[3]),
+                                    ),
+                                    DataCell(
+                                      Text(rows[4]),
+                                    ),
+                                  ],
+                                ),
+                              ]);
+                            });
+//                            updateTable('New');
+                          },
+                          child: const Text(
+                            'New',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        RaisedButton(
+                          onPressed: () {
+                            print('Placed Button Pressed');
+                            setState(() {
+                              table = DataTable(columns: [
+                                DataColumn(
+                                  label: Text(col[0]),
+                                ),
+                                DataColumn(
+                                  label: Text(col[1]),
+                                ),
+                                DataColumn(
+                                  label: Text(col[2]),
+                                ),
+                                DataColumn(
+                                  label: Text(col[3]),
+                                ),
+                                DataColumn(
+                                  label: Text(col[4]),
+                                ),
+                              ], rows: [
+                                DataRow(
+                                  cells: [
+                                    DataCell(
+                                      Text(rows[2]),
+                                    ),
+                                    DataCell(
+                                      Text(rows[0]),
+                                    ),
+                                    DataCell(
+                                      Text(rows[1]),
+                                    ),
+                                    DataCell(
+                                      Text(rows[4]),
+                                    ),
+                                    DataCell(
+                                      Text(rows[3]),
+                                    ),
+                                  ],
+                                ),
+                              ]);
+                            });
+                          },
+                          child: const Text(
+                            'Placed',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        RaisedButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'Dispatched',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        RaisedButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'Completed',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 40,
+                        ),
+                      ],
+                    ),
+                    Spacer(
+                      flex: 2,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Spacer(
+                          flex: 4,
+                        ),
+                        table,
                         Spacer(
                           flex: 40,
                         ),
