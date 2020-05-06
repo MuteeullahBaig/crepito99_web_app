@@ -1,4 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
 
 var value = 'New';
 
@@ -10,7 +16,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
 
-//  Firestore _firestore = Firestore.instance;
+  Firestore _firestore = Firestore.instance;
   var table = DataTable(columns: [
     DataColumn(
       label: Text(
@@ -51,6 +57,7 @@ class _MyAppState extends State<MyApp> {
     ),
   ]);
   var updateTable;
+  var meraPiyaraData;
 
   List<String> col = [
     'Order No.',
@@ -71,57 +78,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
-//    table = statefulDataTable(rows:[],[]);
-    updateTable = (value) {
-      setState(() {
-        if (value == 'New') {
-          table = DataTable(columns: [
-            DataColumn(
-              label: Text(col[0]),
-            ),
-            DataColumn(
-              label: Text(col[1]),
-            ),
-            DataColumn(
-              label: Text(col[2]),
-            ),
-            DataColumn(
-              label: Text(col[3]),
-            ),
-            DataColumn(
-              label: Text(col[4]),
-            ),
-          ], rows: [
-            DataRow(
-              cells: [
-                DataCell(
-                  Text(rows[0]),
-                ),
-                DataCell(
-                  Text(rows[1]),
-                ),
-                DataCell(
-                  Text(rows[2]),
-                ),
-                DataCell(
-                  Text(rows[3]),
-                ),
-                DataCell(
-                  Text(rows[4]),
-                ),
-              ],
-            ),
-          ]);
-        }
-      });
-    };
-
-//    StreamBuilder<QuerySnapshot>(
-//        stream: _firestore.collection('Sandwiches').snapshots(),
-//        builder: (context, snapshot) {
-//          final data = snapshot.data.documents;
-//        });
+    print('hello init');
   }
 
   @override
@@ -223,7 +180,7 @@ class _MyAppState extends State<MyApp> {
 //                      mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         Spacer(
-                          flex: 50,
+                          flex: 80,
                         ),
                         Icon(
                           Icons.chat_bubble,
@@ -496,7 +453,85 @@ class _MyAppState extends State<MyApp> {
                         Spacer(
                           flex: 4,
                         ),
-                        table,
+                        StreamBuilder<QuerySnapshot>(
+                          stream: _firestore.collection('orders').snapshots(),
+                          builder: (context, snapshot) {
+                            final data = snapshot.data.documents;
+                            List<DataRow> meriPyariRow;
+//                            for (var items in data) {
+////                              print(items.data['NoOfItems']);
+//                              final NoOfItems =
+//                                  items.data['NoOfItems'].toString();
+//                              final itemList = items.data['itemList'][0];
+//                              print('itemList');
+//                              print(itemList);
+//                              final itemPrices =
+//                                  items.data['itemPrices'][0].toString();
+//                              final itemQty =
+//                                  items.data['itemQty'][0].toString();
+//
+//                              final rowobj = _rowMakerState();
+//                              final row = rowobj.getMeriPiyariRow(
+//                                  NoOfItems: NoOfItems,
+//                                  itemList: itemList,
+//                                  itemPrices: itemPrices,
+//                                  itemQty: itemQty);
+//                              print('itemQty');
+//                              print(row);
+//                              meriPyariRow.add(row);
+//                            }
+                            //my implementation
+                            DataTable meraPiyaraTable = DataTable(columns: [
+                              DataColumn(
+                                label: Text(
+                                  'NoOfItems',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'itemList',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'itemPrices',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'itemQty',
+                                ),
+                              ),
+                            ], rows: []);
+                            for (var RowValue in data) {
+                              meraPiyaraTable.rows.add(DataRow(
+                                cells: [
+                                  DataCell(
+                                    Text(
+                                      RowValue.data['NoOfItems'].toString(),
+                                    ),
+                                  ),
+                                  DataCell(
+                                    Text(
+                                      RowValue.data['itemList'][0],
+                                    ),
+                                  ),
+                                  DataCell(
+                                    Text(
+                                      RowValue.data['itemPrices'][0].toString(),
+                                    ),
+                                  ),
+                                  DataCell(
+                                    Text(
+                                      RowValue.data['itemQty'][0].toString(),
+                                    ),
+                                  ),
+                                ],
+                              ));
+                            }
+                            return (meraPiyaraTable);
+                          },
+                        ),
                         Spacer(
                           flex: 40,
                         ),
