@@ -16,7 +16,7 @@ class SideBar extends StatelessWidget {
               child: Image.asset('images/logo-01.png'),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 20),
+              padding: const EdgeInsets.only(bottom: 10),
               child: Row(
                 children: <Widget>[
                   Expanded(
@@ -34,7 +34,7 @@ class SideBar extends StatelessWidget {
                             MaterialPageRoute(builder: (context) => MyApp()));
                       },
                       child: Text(
-                        'Home',
+                        'Orders',
                         style: TextStyle(
                           color: Colors.white,
                         ),

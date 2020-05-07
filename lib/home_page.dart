@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:crepito99_web_app/products.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'sideBar.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,45 +19,193 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
 
   Firestore _firestore = Firestore.instance;
-  var table = DataTable(columns: [
+
+  DataTable table = DataTable(columns: [
     DataColumn(
       label: Text(
-        'Order No.',
+        'Order ID.',
       ),
     ),
     DataColumn(
-      label: Text('Order Details'),
+      label: Text(
+        'NoOfItems',
+      ),
     ),
     DataColumn(
-      label: Text('Customer Name'),
+      label: Text(
+        'itemList',
+      ),
     ),
     DataColumn(
-      label: Text('Customer Contact'),
+      label: Text(
+        'itemQty',
+      ),
     ),
     DataColumn(
-      label: Text('Total'),
+      label: Text(
+        'itemPrices',
+      ),
     ),
-  ], rows: [
-    DataRow(
-      cells: [
-        DataCell(
-          Text('1'),
-        ),
-        DataCell(
-          Text('1 Long Ranger'),
-        ),
-        DataCell(
-          Text('Babbu bhai'),
-        ),
-        DataCell(
-          Text('090078601'),
-        ),
-        DataCell(
-          Text('450 PKR/-'),
-        ),
-      ],
+    DataColumn(
+      label: Text(
+        'totalBill',
+      ),
     ),
-  ]);
+    DataColumn(
+      label: Text(
+        'Status',
+      ),
+    ),
+  ], rows: []);
+  DataTable meraPiyaraTable0 = DataTable(columns: [
+    DataColumn(
+      label: Text(
+        'Order ID.',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'NoOfItems',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'itemList',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'itemQty',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'itemPrices',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'totalBill',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'Status',
+      ),
+    ),
+  ], rows: []);
+  DataTable meraPiyaraTable1 = DataTable(columns: [
+    DataColumn(
+      label: Text(
+        'Order ID.',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'NoOfItems',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'itemList',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'itemQty',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'itemPrices',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'totalBill',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'Status',
+      ),
+    ),
+  ], rows: []);
+  DataTable meraPiyaraTable2 = DataTable(columns: [
+    DataColumn(
+      label: Text(
+        'Order ID.',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'NoOfItems',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'itemList',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'itemQty',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'itemPrices',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'totalBill',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'Status',
+      ),
+    ),
+  ], rows: []);
+  DataTable meraPiyaraTable3 = DataTable(columns: [
+    DataColumn(
+      label: Text(
+        'Order ID.',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'NoOfItems',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'itemList',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'itemQty',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'itemPrices',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'totalBill',
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        'Status',
+      ),
+    ),
+  ], rows: []);
+
   var updateTable;
   var meraPiyaraData;
 
@@ -76,6 +225,24 @@ class _MyAppState extends State<MyApp> {
     '450 PKR/-',
   ];
 
+  DataTable meraPiyaraFunction(
+    int status,
+    DataTable meraPiyaraTable0,
+    DataTable meraPiyaraTable1,
+    DataTable meraPiyaraTable2,
+    DataTable meraPiyaraTable3,
+  ) {
+    if (status == 0) {
+      return meraPiyaraTable0;
+    } else if (status == 1) {
+      return meraPiyaraTable0;
+    } else if (status == 2) {
+      return meraPiyaraTable0;
+    } else if (status == 3) {
+      return meraPiyaraTable0;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -84,80 +251,13 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    int statusSelected = 0;
+
     return MaterialApp(
       home: Scaffold(
         body: Row(
           children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Container(
-                color: Colors.red,
-                child: Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 50),
-                      child: Image.asset('images/logo-01.png'),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 1,
-                            child: Icon(
-                              Icons.home,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: FlatButton(
-                              onPressed: () {},
-                              child: Text(
-                                'Home',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 1,
-                            child: Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: FlatButton(
-                              padding: EdgeInsets.all(0.5),
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => products()));
-                              },
-                              child: Text(
-                                'Products',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            SideBar(),
             Expanded(
               flex: 6,
               child: Container(
@@ -222,63 +322,57 @@ class _MyAppState extends State<MyApp> {
                         Spacer(
                           flex: 4,
                         ),
-                        Container(
-                          child: Row(
-                            children: <Widget>[
-                              Card(
-                                  child: Expanded(
-                                child: Container(
-                                  width: 200,
-                                  height: 100,
-                                  child: Column(
-                                    children: <Widget>[
-                                      ListTile(
-                                        title: Text("Total Orders"),
-                                        contentPadding: EdgeInsets.symmetric(
-                                            horizontal: 16.0),
-                                        subtitle: Text("27"),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              )),
-                              Card(
-                                child: Expanded(
-                                  child: Container(
-                                    width: 200,
-                                    height: 100,
-                                    child: Column(
-                                      children: <Widget>[
-                                        ListTile(
-                                          title: Text("Total Sales"),
-                                          contentPadding: EdgeInsets.symmetric(
-                                              horizontal: 16.0),
-                                          subtitle: Text("16420 PKR"),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                        Card(
+                            child: Expanded(
+                          child: Container(
+                            width: 200,
+                            height: 100,
+                            child: Column(
+                              children: <Widget>[
+                                ListTile(
+                                  title: Text("Total Orders"),
+                                  contentPadding:
+                                      EdgeInsets.symmetric(horizontal: 16.0),
+                                  subtitle: Text("27"),
+                                )
+                              ],
+                            ),
+                          ),
+                        )),
+                        Card(
+                          child: Expanded(
+                            child: Container(
+                              width: 200,
+                              height: 100,
+                              child: Column(
+                                children: <Widget>[
+                                  ListTile(
+                                    title: Text("Total Sales"),
+                                    contentPadding:
+                                        EdgeInsets.symmetric(horizontal: 16.0),
+                                    subtitle: Text("16420 PKR"),
+                                  )
+                                ],
                               ),
-                              Card(
-                                child: Expanded(
-                                  child: Container(
-                                    width: 200,
-                                    height: 100,
-                                    child: Column(
-                                      children: <Widget>[
-                                        ListTile(
-                                          title: Text("Orders Cancelled"),
-                                          contentPadding: EdgeInsets.symmetric(
-                                              horizontal: 16.0),
-                                          subtitle: Text("2"),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                            ),
+                          ),
+                        ),
+                        Card(
+                          child: Expanded(
+                            child: Container(
+                              width: 200,
+                              height: 100,
+                              child: Column(
+                                children: <Widget>[
+                                  ListTile(
+                                    title: Text("Orders Cancelled"),
+                                    contentPadding:
+                                        EdgeInsets.symmetric(horizontal: 16.0),
+                                    subtitle: Text("2"),
+                                  )
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
                         Spacer(
@@ -315,43 +409,10 @@ class _MyAppState extends State<MyApp> {
                           onPressed: () {
                             print('New Button Pressed');
                             setState(() {
-                              table = DataTable(columns: [
-                                DataColumn(
-                                  label: Text(col[0]),
-                                ),
-                                DataColumn(
-                                  label: Text(col[1]),
-                                ),
-                                DataColumn(
-                                  label: Text(col[2]),
-                                ),
-                                DataColumn(
-                                  label: Text(col[3]),
-                                ),
-                                DataColumn(
-                                  label: Text(col[4]),
-                                ),
-                              ], rows: [
-                                DataRow(
-                                  cells: [
-                                    DataCell(
-                                      Text(rows[0]),
-                                    ),
-                                    DataCell(
-                                      Text(rows[1]),
-                                    ),
-                                    DataCell(
-                                      Text(rows[2]),
-                                    ),
-                                    DataCell(
-                                      Text(rows[3]),
-                                    ),
-                                    DataCell(
-                                      Text(rows[4]),
-                                    ),
-                                  ],
-                                ),
-                              ]);
+                              statusSelected = 0;
+                              this.table = this.meraPiyaraTable0;
+                              print('statusSelected');
+                              print(statusSelected);
                             });
 //                            updateTable('New');
                           },
@@ -367,43 +428,10 @@ class _MyAppState extends State<MyApp> {
                           onPressed: () {
                             print('Placed Button Pressed');
                             setState(() {
-                              table = DataTable(columns: [
-                                DataColumn(
-                                  label: Text(col[0]),
-                                ),
-                                DataColumn(
-                                  label: Text(col[1]),
-                                ),
-                                DataColumn(
-                                  label: Text(col[2]),
-                                ),
-                                DataColumn(
-                                  label: Text(col[3]),
-                                ),
-                                DataColumn(
-                                  label: Text(col[4]),
-                                ),
-                              ], rows: [
-                                DataRow(
-                                  cells: [
-                                    DataCell(
-                                      Text(rows[2]),
-                                    ),
-                                    DataCell(
-                                      Text(rows[0]),
-                                    ),
-                                    DataCell(
-                                      Text(rows[1]),
-                                    ),
-                                    DataCell(
-                                      Text(rows[4]),
-                                    ),
-                                    DataCell(
-                                      Text(rows[3]),
-                                    ),
-                                  ],
-                                ),
-                              ]);
+                              statusSelected = 1;
+                              this.table = this.meraPiyaraTable1;
+                              print('statusSelected');
+                              print(statusSelected);
                             });
                           },
                           child: const Text(
@@ -415,7 +443,15 @@ class _MyAppState extends State<MyApp> {
                           flex: 1,
                         ),
                         RaisedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            print('Dispatched Button Pressed');
+                            setState(() {
+                              statusSelected = 2;
+                              this.table = this.meraPiyaraTable2;
+                              print('statusSelected');
+                              print(statusSelected);
+                            });
+                          },
                           child: const Text(
                             'Dispatched',
                             style: TextStyle(fontSize: 16),
@@ -425,7 +461,15 @@ class _MyAppState extends State<MyApp> {
                           flex: 1,
                         ),
                         RaisedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            print('Completed Button Pressed');
+                            setState(() {
+                              statusSelected = 3;
+                              this.table = this.meraPiyaraTable3;
+                              print('statusSelected');
+                              print(statusSelected);
+                            });
+                          },
                           child: const Text(
                             'Completed',
                             style: TextStyle(fontSize: 16),
@@ -448,31 +492,13 @@ class _MyAppState extends State<MyApp> {
                           stream: _firestore.collection('orders').snapshots(),
                           builder: (context, snapshot) {
                             final data = snapshot.data.documents;
-                            List<DataRow> meriPyariRow;
-//                            for (var items in data) {
-////                              print(items.data['NoOfItems']);
-//                              final NoOfItems =
-//                                  items.data['NoOfItems'].toString();
-//                              final itemList = items.data['itemList'][0];
-//                              print('itemList');
-//                              print(itemList);
-//                              final itemPrices =
-//                                  items.data['itemPrices'][0].toString();
-//                              final itemQty =
-//                                  items.data['itemQty'][0].toString();
-//
-//                              final rowobj = _rowMakerState();
-//                              final row = rowobj.getMeriPiyariRow(
-//                                  NoOfItems: NoOfItems,
-//                                  itemList: itemList,
-//                                  itemPrices: itemPrices,
-//                                  itemQty: itemQty);
-//                              print('itemQty');
-//                              print(row);
-//                              meriPyariRow.add(row);
-//                            }
-                            //my implementation
-                            DataTable meraPiyaraTable = DataTable(columns: [
+
+                            meraPiyaraTable0 = DataTable(columns: [
+                              DataColumn(
+                                label: Text(
+                                  'Order ID.',
+                                ),
+                              ),
                               DataColumn(
                                 label: Text(
                                   'NoOfItems',
@@ -485,7 +511,39 @@ class _MyAppState extends State<MyApp> {
                               ),
                               DataColumn(
                                 label: Text(
+                                  'itemQty',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
                                   'itemPrices',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'totalBill',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Status',
+                                ),
+                              ),
+                            ], rows: []);
+                            meraPiyaraTable1 = DataTable(columns: [
+                              DataColumn(
+                                label: Text(
+                                  'Order ID.',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'NoOfItems',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'itemList',
                                 ),
                               ),
                               DataColumn(
@@ -493,34 +551,276 @@ class _MyAppState extends State<MyApp> {
                                   'itemQty',
                                 ),
                               ),
+                              DataColumn(
+                                label: Text(
+                                  'itemPrices',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'totalBill',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Status',
+                                ),
+                              ),
                             ], rows: []);
+                            meraPiyaraTable2 = DataTable(columns: [
+                              DataColumn(
+                                label: Text(
+                                  'Order ID.',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'NoOfItems',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'itemList',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'itemQty',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'itemPrices',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'totalBill',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Status',
+                                ),
+                              ),
+                            ], rows: []);
+                            meraPiyaraTable3 = DataTable(columns: [
+                              DataColumn(
+                                label: Text(
+                                  'Order ID.',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'NoOfItems',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'itemList',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'itemQty',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'itemPrices',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'totalBill',
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Status',
+                                ),
+                              ),
+                            ], rows: []);
+
+                            int OrderID = 1;
                             for (var RowValue in data) {
-                              meraPiyaraTable.rows.add(DataRow(
-                                cells: [
-                                  DataCell(
-                                    Text(
-                                      RowValue.data['NoOfItems'].toString(),
-                                    ),
-                                  ),
-                                  DataCell(
-                                    Text(
-                                      RowValue.data['itemList'][0],
-                                    ),
-                                  ),
-                                  DataCell(
-                                    Text(
-                                      RowValue.data['itemPrices'][0].toString(),
-                                    ),
-                                  ),
-                                  DataCell(
-                                    Text(
-                                      RowValue.data['itemQty'][0].toString(),
-                                    ),
-                                  ),
-                                ],
-                              ));
+                              if (RowValue.documentID != 'NoOfOrders' &&
+                                  RowValue.data['NoOfItems'] != 0) {
+                                if (RowValue.data['status'] == 0) {
+                                  this.meraPiyaraTable0.rows.add(DataRow(
+                                        cells: [
+                                          DataCell(
+                                            Text(
+                                              RowValue.documentID.toString(),
+                                            ),
+                                          ),
+                                          DataCell(
+                                            Text(
+                                              RowValue.data['NoOfItems']
+                                                  .toString(),
+                                            ),
+                                          ),
+                                          DataCell(
+                                            Text(
+                                              RowValue.data['itemList'][0],
+                                            ),
+                                          ),
+                                          DataCell(
+                                            Text(RowValue.data['itemQty'][0]
+                                                .toString()),
+                                          ),
+                                          DataCell(
+                                            Text(RowValue.data['itemPrices'][0]
+                                                .toString()),
+                                          ),
+                                          DataCell(
+                                            Text(RowValue.data['totalBill']
+                                                .toString()),
+                                          ),
+                                          DataCell(
+                                            MyStatefulWidget(
+                                              firestore: _firestore,
+                                              documentID: RowValue.documentID,
+                                              status: RowValue.data['status'],
+                                            ),
+                                          ),
+                                        ],
+                                      ));
+                                }
+                                if (RowValue.data['status'] == 1) {
+                                  this.meraPiyaraTable1.rows.add(DataRow(
+                                        cells: [
+                                          DataCell(
+                                            Text(
+                                              RowValue.documentID.toString(),
+                                            ),
+                                          ),
+                                          DataCell(
+                                            Text(
+                                              RowValue.data['NoOfItems']
+                                                  .toString(),
+                                            ),
+                                          ),
+                                          DataCell(
+                                            Text(
+                                              RowValue.data['itemList'][0],
+                                            ),
+                                          ),
+                                          DataCell(
+                                            Text(RowValue.data['itemQty'][0]
+                                                .toString()),
+                                          ),
+                                          DataCell(
+                                            Text(RowValue.data['itemPrices'][0]
+                                                .toString()),
+                                          ),
+                                          DataCell(
+                                            Text(RowValue.data['totalBill']
+                                                .toString()),
+                                          ),
+                                          DataCell(
+                                            MyStatefulWidget(
+                                              firestore: _firestore,
+                                              documentID: RowValue.documentID,
+                                              status: RowValue.data['status'],
+                                            ),
+                                          ),
+                                        ],
+                                      ));
+                                }
+                                if (RowValue.data['status'] == 2) {
+                                  this.meraPiyaraTable2.rows.add(DataRow(
+                                        cells: [
+                                          DataCell(
+                                            Text(
+                                              RowValue.documentID.toString(),
+                                            ),
+                                          ),
+                                          DataCell(
+                                            Text(
+                                              RowValue.data['NoOfItems']
+                                                  .toString(),
+                                            ),
+                                          ),
+                                          DataCell(
+                                            Text(
+                                              RowValue.data['itemList'][0],
+                                            ),
+                                          ),
+                                          DataCell(
+                                            Text(RowValue.data['itemQty'][0]
+                                                .toString()),
+                                          ),
+                                          DataCell(
+                                            Text(RowValue.data['itemPrices'][0]
+                                                .toString()),
+                                          ),
+                                          DataCell(
+                                            Text(RowValue.data['totalBill']
+                                                .toString()),
+                                          ),
+                                          DataCell(
+                                            MyStatefulWidget(
+                                              firestore: _firestore,
+                                              documentID: RowValue.documentID,
+                                              status: RowValue.data['status'],
+                                            ),
+                                          ),
+                                        ],
+                                      ));
+                                }
+                                if (RowValue.data['status'] == 3) {
+                                  this.meraPiyaraTable3.rows.add(DataRow(
+                                        cells: [
+                                          DataCell(
+                                            Text(
+                                              RowValue.documentID.toString(),
+                                            ),
+                                          ),
+                                          DataCell(
+                                            Text(
+                                              RowValue.data['NoOfItems']
+                                                  .toString(),
+                                            ),
+                                          ),
+                                          DataCell(
+                                            Text(
+                                              RowValue.data['itemList'][0],
+                                            ),
+                                          ),
+                                          DataCell(
+                                            Text(RowValue.data['itemQty'][0]
+                                                .toString()),
+                                          ),
+                                          DataCell(
+                                            Text(RowValue.data['itemPrices'][0]
+                                                .toString()),
+                                          ),
+                                          DataCell(
+                                            Text(RowValue.data['totalBill']
+                                                .toString()),
+                                          ),
+                                          DataCell(
+                                            MyStatefulWidget(
+                                              firestore: _firestore,
+                                              documentID: RowValue.documentID,
+                                              status: RowValue.data['status'],
+                                            ),
+                                          ),
+                                        ],
+                                      ));
+                                }
+                              }
+                              OrderID++;
                             }
-                            return (meraPiyaraTable);
+//                            this.table = meraPiyaraFunction(
+//                                statusSelected,
+//                                meraPiyaraTable0,
+//                                meraPiyaraTable1,
+//                                meraPiyaraTable2,
+//                                meraPiyaraTable3);
+
+                            return this.table;
                           },
                         ),
                         Spacer(
@@ -538,6 +838,92 @@ class _MyAppState extends State<MyApp> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class MyStatefulWidget extends StatefulWidget {
+  MyStatefulWidget({Key key, this.firestore, this.documentID, this.status})
+      : super(key: key);
+
+  Firestore firestore;
+  var documentID;
+  int status;
+
+  @override
+  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  String dropdownValue = '';
+
+  void updateData(int newStatus) {
+    try {
+      widget.firestore
+          .collection('orders')
+          .document(widget.documentID)
+          .updateData({'status': newStatus});
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  int getIntStatus(String value) {
+    if (value == 'New')
+      return 0;
+    else if (value == 'Placed')
+      return 1;
+    else if (value == 'Dispatched')
+      return 2;
+    else if (value == 'Completed') return 3;
+  }
+
+  String getStrStatus(int value) {
+    if (value == 0)
+      return 'New';
+    else if (value == 1)
+      return 'Placed';
+    else if (value == 2)
+      return 'Dispatched';
+    else if (value == 3) return 'Completed';
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      this.dropdownValue = getStrStatus(widget.status);
+    });
+    print('dropdownValue');
+    print(dropdownValue);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: dropdownValue,
+      icon: Icon(Icons.arrow_downward),
+      iconSize: 24,
+      elevation: 16,
+      style: TextStyle(color: Colors.red),
+      underline: Container(
+        height: 2,
+        color: Colors.black,
+      ),
+      onChanged: (String newValue) {
+        setState(() {
+          updateData(getIntStatus(newValue));
+          dropdownValue = newValue;
+        });
+      },
+      items: <String>['New', 'Placed', 'Dispatched', 'Completed']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
     );
   }
 }
