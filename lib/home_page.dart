@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crepito99_web_app/products.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -110,10 +111,13 @@ class _MyAppState extends State<MyApp> {
                           ),
                           Expanded(
                             flex: 3,
-                            child: Text(
-                              'Home',
-                              style: TextStyle(
-                                color: Colors.white,
+                            child: FlatButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Home',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
@@ -133,35 +137,22 @@ class _MyAppState extends State<MyApp> {
                           ),
                           Expanded(
                             flex: 3,
-                            child: Text(
-                              'Products',
-                              style: TextStyle(
-                                color: Colors.white,
+                            child: FlatButton(
+                              padding: EdgeInsets.all(0.5),
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => products()));
+                              },
+                              child: Text(
+                                'Products',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
                         ],
                       ),
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 1,
-                          child: Icon(
-                            Icons.settings,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: Text(
-                            'Settings',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
                   ],
                 ),
